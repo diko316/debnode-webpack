@@ -1,0 +1,29 @@
+{
+  "name": "debnode-webpack-test",
+  "version": "0.0.1",
+  "description": "Test Webpack capabilities",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://diko316@github.com/diko316/debnode-webpack.git"
+  },
+  "keywords": [
+    "webpack",
+    "test"
+  ],
+  "author": "Diko Tech Slave",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/diko316/debnode-webpack/issues"
+  },
+  "devDependencies": {
+    "babel-loader": "^6.2.4",
+    "image-webpack-loader": "^1.6.3",
+    "less-loader": "^2.2.2",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
