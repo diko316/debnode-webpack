@@ -14,3 +14,5 @@ RUN chmod +x -R "$APP_TOOLS" && \
         build-essential && \
     rm -rf /root/.node-gyp && \
     "$APP_TOOLS/installer/cleanup.sh"
+
+CMD "$APP_TOOLS/webpack/run.sh"
