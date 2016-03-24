@@ -6,11 +6,19 @@ module.exports = {
         path:     'build',
         filename: 'bundle.js',
     },
+    devServer: {
+        contentBase: "./build",
+    },
+    devTool: 'eval',
+    eslint: {
+        emitError: true
+    },
     module: {
         loaders: [{
-            test:    /\.js/,
-            loaders:  ['babel', 'eslint'],
+            test: /\.js/,
+            loaders:  ['babel-loader', 'eslint-loader'],
             include: './src',
+            exclude: /node_modules/,
             query: {
                 presets: ['es2015']
             }
