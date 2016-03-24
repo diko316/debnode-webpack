@@ -4,7 +4,7 @@ FROM diko316/debnode:latest
 # add gulp tools
 ADD ./tools $APP_TOOLS
 
-RUN chmod +x -R "$APP_TOOLS" && \
+RUN chmod +x -R "$APP_TOOLS/*" && \
     "$APP_TOOLS/installer/install.sh" \
         build-essential && \
     npm install -g -ddd \
