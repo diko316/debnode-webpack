@@ -8,29 +8,15 @@ EXPOSE $APP_PORT
 ADD ./tools $APP_TOOLS
 
 ADD package.json /tmp/package.json
+ADD bower.json /tmp/bower.json
 
 RUN "$APP_TOOLS/installer/npminstall.sh" \
-        --apt \
-            build-essential \
         --apt-permanent \
             libpng-dev \
             libpng12-dev \
         --global \
             webpack \
             webpack-dev-server
-        #--local \
-        #    webpack \
-        #    less \
-        #    less-loader \
-        #    css-loader \
-        #    babel-core \
-        #    babel-loader \
-        #    style-loader \
-        #    html-loader \
-        #    eslint \
-        #    eslint-loader \
-        #    babel-eslint \
-        #    image-webpack-loader
 
 WORKDIR $PROJECT_ROOT
 

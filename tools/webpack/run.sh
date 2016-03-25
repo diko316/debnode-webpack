@@ -9,7 +9,7 @@ if [ -d "${PROJECT_ROOT}" ] && [ -f "${PROJECT_ROOT}/webpack.config.js" ]; then
     cd "${PROJECT_ROOT}"
     
     webpack --display-modules --display-chunks
-    webpack-dev-server --inline --hot --port "${APP_PORT}" --host "${IP_ADDR}"
+    webpack-dev-server --port "${APP_PORT}" --host "${IP_ADDR}"
     
     cd "${CURRENT_DIR}"
 fi

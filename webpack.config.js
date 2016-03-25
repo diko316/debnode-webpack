@@ -1,39 +1,73 @@
 'use strict';
 
-module.exports = {
-    entry:  './src/test.js',
+var webpack = require("webpack"),
+    ResolverPlugin = webpack.ResolverPlugin,
+    ProvidePlugin = webpack.ProvidePlugin;
+
+
+module.exports = require('./webpack/config.js')({
+    entry: {
+        app: './src/app.js',
+        vendor: ["jquery"]
+    },
+    
     output: {
-        path:     'build',
-        filename: 'bundle.js',
+        path:     './public/assets',
+        publicPath: '/assets/',
+        filename: 'app.js',
     },
+    
     devServer: {
-        contentBase: "./build",
+        contentBase: "./public"
     },
-    devTool: 'eval',
-    eslint: {
-        emitError: true
-    },
+    
+    devTool: 'eval-source-map',
+    
     resolve: {
         modulesDirectories: ["node_modules", "bower_components"]
     },
+    
     plugins: [
-        new webpack.ResolverPlugin(
-            new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(".bower.json", ["main"])
-        )
+        new webpack.optimize.CommonsChunkPlugin(
+            "vendor",
+            "vendor.js"
+        ),
+        
+        new ResolverPlugin([
+                new ResolverPlugin.DirectoryDescriptionFilePlugin(
+                        ".bower.json",
+                        ["main"]
+                    )
+            ],
+            ["normal", "loader"]),
+        
+        new ProvidePlugin({
+            $:      "jquery",
+            jQuery: "jquery"
+        })
     ],
+    
     module: {
         loaders: [{
             test: /\.js/,
             loaders:  ['babel-loader', 'eslint-loader'],
             include: './src',
-            exclude: /node_modules/,
+            exclude: /node_modules|bower_components/,
             query: {
                 presets: ['es2015']
             }
         },
         {
-            test: /\.less$/,
-            loader: "style!css!less"
+            test: /styles\.less$/,
+            loaders: ["style","css","less"]
+        },
+        {
+            test: /\.css/,
+            loaders: ["style","css"]
+        },
+        {
+            test: /\.eot|\.ttf|\.svg|\.woff2?/,
+            loader: 'file?name=[name].[ext]'
         },
         {
             test: /\.(png|jpg|svg)/,
@@ -43,4 +77,5 @@ module.exports = {
             loader: 'html'
         }]
     }
-};
+    
+});

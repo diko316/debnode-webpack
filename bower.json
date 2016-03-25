@@ -1,0 +1,30 @@
+{
+  "name": "debnode-webpack-test",
+  "description": "Test Webpack capabilities",
+  "main": "index.js",
+  "authors": [
+    "Diko Tech Slave"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "webpack",
+    "test"
+  ],
+  "homepage": "https://github.com/diko316/debnode-webpack",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.2"
+  }
+}
