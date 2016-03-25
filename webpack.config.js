@@ -13,6 +13,14 @@ module.exports = {
     eslint: {
         emitError: true
     },
+    resolve: {
+        modulesDirectories: ["node_modules", "bower_components"]
+    },
+    plugins: [
+        new webpack.ResolverPlugin(
+            new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(".bower.json", ["main"])
+        )
+    ],
     module: {
         loaders: [{
             test: /\.js/,
