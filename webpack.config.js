@@ -2,7 +2,9 @@
 
 var webpack = require("webpack"),
     ResolverPlugin = webpack.ResolverPlugin,
-    ProvidePlugin = webpack.ProvidePlugin;
+    ProvidePlugin = webpack.ProvidePlugin,
+    ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 module.exports = require('./webpack/config.js')({
@@ -14,24 +16,22 @@ module.exports = require('./webpack/config.js')({
     output: {
         path:     './public/assets',
         publicPath: '/assets/',
-        filename: 'app.js',
+        filename: '[name].js'
     },
     
     devServer: {
         contentBase: "./public"
     },
     
-    devTool: 'eval-source-map',
+    devTool: 'eval',
     
     resolve: {
         modulesDirectories: ["node_modules", "bower_components"]
     },
     
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin(
-            "vendor",
-            "vendor.js"
-        ),
+        
+        new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js"),
         
         new ResolverPlugin([
                 new ResolverPlugin.DirectoryDescriptionFilePlugin(
@@ -44,7 +44,15 @@ module.exports = require('./webpack/config.js')({
         new ProvidePlugin({
             $:      "jquery",
             jQuery: "jquery"
-        })
+        }),
+        
+        new HtmlWebpackPlugin({
+            filename: '../index.html',
+            template: 'src/index.html'
+        }),
+        
+        new ExtractTextPlugin('[name].css')
+
     ],
     
     module: {
@@ -59,11 +67,11 @@ module.exports = require('./webpack/config.js')({
         },
         {
             test: /styles\.less$/,
-            loaders: ["style","css","less"]
+            loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader"),
         },
         {
             test: /\.css/,
-            loaders: ["style","css"]
+            loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
         },
         {
             test: /\.eot|\.ttf|\.svg|\.woff2?/,

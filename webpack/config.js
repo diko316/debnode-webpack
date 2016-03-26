@@ -33,7 +33,7 @@ function mergeConfig(config, custom) {
                     config[name] : void(0);
         switch (name) {
         case 'devServer':
-            valid = ts.call(cvalue) !== '[object Object]';
+            valid = ts.call(cvalue) === '[object Object]';
             if (ts.call(value) === '[object Object]') {
                 fvalue = valid ?
                             objMerge(value, cvalue) : value;
@@ -56,7 +56,7 @@ function mergeConfig(config, custom) {
             }
             break;
         case 'resolve':
-            valid = ts.call(cvalue) !== '[object Object]';
+            valid = ts.call(cvalue) === '[object Object]';
             if (ts.call(value) === '[object Object]') {
                 fvalue = valid ?
                             objMerge(value, cvalue) : value;
