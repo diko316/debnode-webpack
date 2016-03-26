@@ -7,17 +7,20 @@ EXPOSE $APP_PORT
 # add webpack tools
 ADD ./tools $APP_TOOLS
 
-ADD package.json /tmp/package.json
-ADD bower.json /tmp/bower.json
+# autobuild gulp stack
+RUN "$APP_TOOLS/autobuild.sh" webpack
 
-RUN "$APP_TOOLS/installer/npminstall.sh" \
-        --apt-permanent \
-            libpng-dev \
-            libpng12-dev \
-        --global \
-            webpack \
-            webpack-dev-server
+#ADD package.json /tmp/package.json
+#ADD bower.json /tmp/bower.json
 
-WORKDIR $PROJECT_ROOT
+#RUN "$APP_TOOLS/installer/npminstall.sh" \
+#        --apt-permanent \
+#            libpng-dev \
+#            libpng12-dev \
+#        --global \
+#            webpack \
+#            webpack-dev-server
+
+#WORKDIR $PROJECT_ROOT
 
 CMD "$APP_TOOLS/webpack/run.sh"
